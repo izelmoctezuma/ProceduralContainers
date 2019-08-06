@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
+#include "Engine.h"
 #include "ProceduralContainer.generated.h"
 
 UCLASS()
@@ -23,6 +25,24 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
+	void PostEditChangeProperty(FPropertyChangedEvent & PropertyChangedEvent);
+
+	UStaticMeshComponent* CreateSubComponent(UStaticMesh* Mesh, FVector Location, FRotator Rotation);
+
+	bool IsColliding(UStaticMeshComponent* CurrentItem);
+
+	void Populate();
+
+//	UPROPERTY(VisibleAnywhere)
+//		UBoxComponent* BoundingBox;
+
+	UPROPERTY(EditAnywhere, Category = "Container Parameters")
+		TArray<UStaticMesh*> MeshArray;
+
+	UPROPERTY(EditAnywhere, Category = "Container Parameters")
+		float ContainerExtent;
+
+	UPROPERTY(EditAnywhere, Category = "Container Parameters")
+		bool RandomizeRot;
 	
 };
